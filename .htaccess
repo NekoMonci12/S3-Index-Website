@@ -1,0 +1,17 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Block POST requests to any PHP file except if you whitelist (optional)
+RewriteCond %{REQUEST_METHOD} ^POST$
+RewriteCond %{REQUEST_URI} \.php$ [NC]
+RewriteRule ^ - [F,L]
+
+# Optional: allow POST only to specific PHP (uncomment if needed)
+# RewriteCond %{REQUEST_METHOD} ^POST$
+# RewriteCond %{REQUEST_URI} ^/upload\.php$ [NC]
+# RewriteRule ^ - [L]
+
+# For all other methods (PUT, DELETE, etc), deny
+<LimitExcept GET POST>
+  Require all denied
+</LimitExcept>
